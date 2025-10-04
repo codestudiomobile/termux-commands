@@ -1,58 +1,58 @@
 {
   "py": {
     "install": "(command -v python || pkg install -y python)",
-    "template": "echo 'Checking for Python...' && command -v python || (echo 'Python not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Python...' && pkg install -y python) && echo 'Running %2$s...' && python \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
+    "template": "pkg update -y && pkg upgrade -y && echo 'Checking for Python...' && command -v python || (echo 'Python not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Python...' && pkg install -y python) && echo 'Running %2$s...' && python \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
   },
   "java": {
   "install": "(command -v javac || (pkg update -y && pkg upgrade -y && latest_jdk=$(pkg search openjdk | awk '{print $1}' | grep '^openjdk-' | sort -V | tail -n 1) && pkg install -y \"$latest_jdk\"))",
-  "template": "echo 'Checking for Java compiler...' && command -v javac || (echo 'Java not found. Install latest OpenJDK? [y/n]' && read confirm && echo 'You entered: $confirm' && [ \"$confirm\" = \"y\" ] && echo 'Installing latest OpenJDK...' && pkg update -y && pkg upgrade -y && latest_jdk=$(pkg search openjdk | awk '{print $1}' | grep '^openjdk-' | sort -V | tail -n 1) && pkg install -y \"$latest_jdk\") && echo 'Compiling %2$s...' && javac \"%2$s\" 2>&1 | tee %3$s && FILENAME=`basename \"%2$s\" .java` && FILEDIR=`dirname \"%2$s\"` && echo 'Running %2$s...' && (cd \"$FILEDIR\" && java \"$FILENAME\") 2>&1 | tee -a %3$s && echo \"%4$s\" && rm -f \"%2$s\" \"$FILEDIR/$FILENAME.class\""
+  "template": "pkg update -y && pkg upgrade -y && echo 'Checking for Java compiler...' && command -v javac || (echo 'Java not found. Install latest OpenJDK? [y/n]' && read confirm && echo 'You entered: $confirm' && [ \"$confirm\" = \"y\" ] && echo 'Installing latest OpenJDK...' && pkg update -y && pkg upgrade -y && latest_jdk=$(pkg search openjdk | awk '{print $1}' | grep '^openjdk-' | sort -V | tail -n 1) && pkg install -y \"$latest_jdk\") && echo 'Compiling %2$s...' && javac \"%2$s\" 2>&1 | tee %3$s && FILENAME=`basename \"%2$s\" .java` && FILEDIR=`dirname \"%2$s\"` && echo 'Running %2$s...' && (cd \"$FILEDIR\" && java \"$FILENAME\") 2>&1 | tee -a %3$s && echo \"%4$s\" && rm -f \"%2$s\" \"$FILEDIR/$FILENAME.class\""
   },
   "c": {
     "install": "(command -v clang || pkg install -y clang)",
-    "template": "echo 'Checking for C compiler...' && command -v clang || (echo 'Clang not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Clang...' && pkg install -y clang) && echo 'Compiling %2$s...' && clang \"%2$s\" -o %2$s.out 2>&1 | tee %3$s && echo 'Running %2$s.out...' && \"%2$s.out\" 2>&1 | tee -a %3$s && echo \"%4$s\" && rm -f \"%2$s\" \"%2$s.out\""
+    "template": "pkg update -y && pkg upgrade -y && echo 'Checking for C compiler...' && command -v clang || (echo 'Clang not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Clang...' && pkg install -y clang) && echo 'Compiling %2$s...' && clang \"%2$s\" -o %2$s.out 2>&1 | tee %3$s && echo 'Running %2$s.out...' && \"%2$s.out\" 2>&1 | tee -a %3$s && echo \"%4$s\" && rm -f \"%2$s\" \"%2$s.out\""
   },
   "cpp": {
     "install": "(command -v clang++ || pkg install -y clang)",
-    "template": "echo 'Checking for C++ compiler...' && command -v clang++ || (echo 'Clang++ not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Clang++...' && pkg install -y clang) && echo 'Compiling %2$s...' && clang++ \"%2$s\" -o %2$s.out 2>&1 | tee %3$s && echo 'Running %2$s.out...' && \"%2$s.out\" 2>&1 | tee -a %3$s && echo \"%4$s\" && rm -f \"%2$s\" \"%2$s.out\""
+    "template": "pkg update -y && pkg upgrade -y && echo 'Checking for C++ compiler...' && command -v clang++ || (echo 'Clang++ not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Clang++...' && pkg install -y clang) && echo 'Compiling %2$s...' && clang++ \"%2$s\" -o %2$s.out 2>&1 | tee %3$s && echo 'Running %2$s.out...' && \"%2$s.out\" 2>&1 | tee -a %3$s && echo \"%4$s\" && rm -f \"%2$s\" \"%2$s.out\""
   },
   "node": {
     "install": "(command -v node || pkg install -y nodejs)",
-    "template": "echo 'Checking for Node.js...' && command -v node || (echo 'Node.js not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Node.js...' && pkg install -y nodejs) && echo 'Running %2$s...' && node \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
+    "template": "pkg update -y && pkg upgrade -y && echo 'Checking for Node.js...' && command -v node || (echo 'Node.js not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Node.js...' && pkg install -y nodejs) && echo 'Running %2$s...' && node \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
   },
   "php": {
     "install": "(command -v php || pkg install -y php)",
-    "template": "echo 'Checking for PHP...' && command -v php || (echo 'PHP not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing PHP...' && pkg install -y php) && echo 'Running %2$s...' && php \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
+    "template": "pkg update -y && pkg upgrade -y && echo 'Checking for PHP...' && command -v php || (echo 'PHP not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing PHP...' && pkg install -y php) && echo 'Running %2$s...' && php \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
   },
   "ruby": {
     "install": "(command -v ruby || pkg install -y ruby)",
-    "template": "echo 'Checking for Ruby...' && command -v ruby || (echo 'Ruby not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Ruby...' && pkg install -y ruby) && echo 'Running %2$s...' && ruby \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
+    "template": "pkg update -y && pkg upgrade -y && echo 'Checking for Ruby...' && command -v ruby || (echo 'Ruby not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Ruby...' && pkg install -y ruby) && echo 'Running %2$s...' && ruby \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
   },
   "go": {
     "install": "(command -v go || pkg install -y golang)",
-    "template": "echo 'Checking for Go...' && command -v go || (echo 'Go not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Go...' && pkg install -y golang) && echo 'Running %2$s...' && go run \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
+    "template": "pkg update -y && pkg upgrade -y && echo 'Checking for Go...' && command -v go || (echo 'Go not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Go...' && pkg install -y golang) && echo 'Running %2$s...' && go run \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
   },
   "rust": {
     "install": "(command -v rustc || pkg install -y rust)",
-    "template": "echo 'Checking for Rust...' && command -v rustc || (echo 'Rust not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Rust...' && pkg install -y rust) && echo 'Compiling %2$s...' && rustc \"%2$s\" -o %2$s.out 2>&1 | tee %3$s && echo 'Running %2$s.out...' && \"%2$s.out\" 2>&1 | tee -a %3$s && echo \"%4$s\" && rm -f \"%2$s\" \"%2$s.out\""
+    "template": "pkg update -y && pkg upgrade -y && echo 'Checking for Rust...' && command -v rustc || (echo 'Rust not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Rust...' && pkg install -y rust) && echo 'Compiling %2$s...' && rustc \"%2$s\" -o %2$s.out 2>&1 | tee %3$s && echo 'Running %2$s.out...' && \"%2$s.out\" 2>&1 | tee -a %3$s && echo \"%4$s\" && rm -f \"%2$s\" \"%2$s.out\""
   },
   "kotlin": {
     "install": "(command -v kotlinc || pkg install -y kotlin)",
-    "template": "echo 'Checking for Kotlin...' && command -v kotlinc || (echo 'Kotlin not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Kotlin...' && pkg install -y kotlin) && echo 'Compiling %2$s...' && kotlinc \"%2$s\" -include-runtime -d %2$s.jar 2>&1 | tee %3$s && echo 'Running MainKt...' && dalvikvm -cp %2$s.jar MainKt 2>&1 | tee -a %3$s && echo \"%4$s\""
+    "template": "pkg update -y && pkg upgrade -y && echo 'Checking for Kotlin...' && command -v kotlinc || (echo 'Kotlin not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Kotlin...' && pkg install -y kotlin) && echo 'Compiling %2$s...' && kotlinc \"%2$s\" -include-runtime -d %2$s.jar 2>&1 | tee %3$s && echo 'Running MainKt...' && dalvikvm -cp %2$s.jar MainKt 2>&1 | tee -a %3$s && echo \"%4$s\""
   },
   "csharp": {
     "install": "(command -v mcs || pkg install -y mono)",
-    "template": "echo 'Checking for Mono C#...' && command -v mcs || (echo 'Mono not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Mono...' && pkg install -y mono) && echo 'Compiling %2$s...' && mcs \"%2$s\" -out:%2$s.exe 2>&1 | tee %3$s && echo 'Running %2$s.exe...' && mono %2$s.exe 2>&1 | tee -a %3$s && echo \"%4$s\" && rm -f \"%2$s\" \"%2$s.exe\""
+    "template": "pkg update -y && pkg upgrade -y && echo 'Checking for Mono C#...' && command -v mcs || (echo 'Mono not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Mono...' && pkg install -y mono) && echo 'Compiling %2$s...' && mcs \"%2$s\" -out:%2$s.exe 2>&1 | tee %3$s && echo 'Running %2$s.exe...' && mono %2$s.exe 2>&1 | tee -a %3$s && echo \"%4$s\" && rm -f \"%2$s\" \"%2$s.exe\""
   },
   "perl": {
     "install": "(command -v perl || pkg install -y perl)",
-    "template": "echo 'Checking for Perl...' && command -v perl || (echo 'Perl not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Perl...' && pkg install -y perl) && echo 'Running %2$s...' && perl \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
+    "template": "pkg update -y && pkg upgrade -y && echo 'Checking for Perl...' && command -v perl || (echo 'Perl not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Perl...' && pkg install -y perl) && echo 'Running %2$s...' && perl \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
   },
   "lua": {
     "install": "(command -v lua || pkg install -y lua)",
-    "template": "echo 'Checking for Lua...' && command -v lua || (echo 'Lua not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Lua...' && pkg install -y lua) && echo 'Running %2$s...' && lua \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
+    "template": "pkg update -y && pkg upgrade -y && echo 'Checking for Lua...' && command -v lua || (echo 'Lua not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Lua...' && pkg install -y lua) && echo 'Running %2$s...' && lua \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
   },
   "terminal": {
     "install": "(command -v bash || pkg install -y bash)",
-    "template": "echo 'Checking for Bash...' && command -v bash || (echo 'Bash not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Bash...' && pkg install -y bash) && echo 'Running %2$s...' && bash \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
+    "template": "pkg update -y && pkg upgrade -y && echo 'Checking for Bash...' && command -v bash || (echo 'Bash not found. Install now? [y/n]' && read confirm && echo 'You entered: $confirm'&& [ \"$confirm\" = \"y\" ] && echo 'Installing Bash...' && pkg install -y bash) && echo 'Running %2$s...' && bash \"%2$s\" 2>&1 | tee %3$s && echo \"%4$s\""
   }
 }
