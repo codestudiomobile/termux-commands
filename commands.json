@@ -1,0 +1,62 @@
+{
+  "py": {
+    "install": "(command -v python || pkg install -y python)",
+    "template": "%1$s >/dev/null 2>&1 && python \"%2$s\" 2>&1 | tee %3$s; echo \"\\n%4$s\""
+  },
+  "java": {
+    "install": "(command -v javac || pkg install -y openjdk)",
+    "template": "%1$s >/dev/null 2>&1 && javac \"%2$s\" 2>&1 | tee %3$s && FILENAME=`basename \"%2$s\" .java` && FILEDIR=`dirname \"%2$s\"` && ( cd \"$FILEDIR\" && java \"$FILENAME\" ) 2>&1 | tee -a %3$s && echo \"\\n%4$s\" && rm -f \"%2$s\" \"$FILEDIR/$FILENAME.class\""
+  },
+  "c": {
+    "install": "(command -v clang || pkg install -y clang)",
+    "template": "%1$s >/dev/null 2>&1 && clang \"%2$s\" -o %2$s.out 2>&1 | tee %3$s && \"%2$s.out\" 2>&1 | tee -a %3$s && echo \"\\n%4$s\" && rm -f \"%2$s\" \"%2$s.out\""
+  },
+  "cpp": {
+    "install": "(command -v clang++ || pkg install -y clang)",
+    "template": "%1$s >/dev/null 2>&1 && clang++ \"%2$s\" -o %2$s.out 2>&1 | tee %3$s && \"%2$s.out\" 2>&1 | tee -a %3$s && echo \"\\n%4$s\" && rm -f \"%2$s\" \"%2$s.out\""
+  },
+  "node": {
+    "install": "(command -v node || pkg install -y nodejs)",
+    "template": "%1$s >/dev/null 2>&1 && node \"%2$s\" 2>&1 | tee %3$s; echo \"\\n%4$s\""
+  },
+  "php": {
+    "install": "(command -v php || pkg install -y php)",
+    "template": "%1$s >/dev/null 2>&1 && php \"%2$s\" 2>&1 | tee %3$s; echo \"\\n%4$s\""
+  },
+  "ruby": {
+    "install": "(command -v ruby || pkg install -y ruby)",
+    "template": "%1$s >/dev/null 2>&1 && ruby \"%2$s\" 2>&1 | tee %3$s; echo \"\\n%4$s\""
+  },
+  "go": {
+    "install": "(command -v go || pkg install -y golang)",
+    "template": "%1$s >/dev/null 2>&1 && go run \"%2$s\" 2>&1 | tee %3$s; echo \"\\n%4$s\""
+  },
+  "rust": {
+    "install": "(command -v rustc || pkg install -y rust)",
+    "template": "%1$s >/dev/null 2>&1 && rustc \"%2$s\" -o %2$s.out 2>&1 | tee %3$s && \"%2$s.out\" 2>&1 | tee -a %3$s && echo \"\\n%4$s\" && rm -f \"%2$s\" \"%2$s.out\""
+  },
+  "kotlin": {
+    "install": "(command -v kotlinc || pkg install -y kotlin)",
+    "template": "%1$s >/dev/null 2>&1 && kotlinc \"%2$s\" -include-runtime -d %2$s.jar 2>&1 | tee %3$s && dalvikvm -cp %2$s.jar MainKt 2>&1 | tee -a %3$s; echo \"\\n%4$s\""
+  },
+  "terminal": {
+    "install": "",
+    "template": "tmux attach-session -t %1$s || tmux new-session -d -s %1$s"
+  },
+  "vnc": {
+    "install": "(pkg install x11-repo -y && pkg install tigervnc -y)",
+    "template": "%1$s && vncserver :1 && export DISPLAY=:1 && echo \"VNC server started on :1\""
+  },
+  "csharp": {
+  "install": "(command -v mcs || pkg install -y mono)",
+  "template": "%1$s >/dev/null 2>&1 && mcs \"%2$s\" -out:%2$s.exe 2>&1 | tee %3$s && mono %2$s.exe 2>&1 | tee -a %3$s; echo \"\\n%4$s\" && rm -f \"%2$s\" \"%2$s.exe\""
+  },
+  "perl": {
+  "install": "(command -v perl || pkg install -y perl)",
+  "template": "%1$s >/dev/null 2>&1 && perl \"%2$s\" 2>&1 | tee %3$s; echo \"\\n%4$s\""
+  },
+  "lua": {
+  "install": "(command -v lua || pkg install -y lua)",
+  "template": "%1$s >/dev/null 2>&1 && lua \"%2$s\" 2>&1 | tee %3$s; echo \"\\n%4$s\""
+  }
+}
