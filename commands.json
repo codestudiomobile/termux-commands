@@ -3,10 +3,9 @@
     "install": "(command -v python || pkg install -y python)",
     "template": "%1$s >/dev/null 2>&1 && python \"%2$s\" 2>&1 | tee %3$s; echo \"\\n%4$s\""
   },
-  "java": {
+  "java": { 
     "install": "(command -v javac || pkg install -y openjdk)",
-    "template": "echo 'Checking for javac...' &&(command -v javac || pkg install -y openjdk) &&echo 'Compiling %2$s...' &&javac "%2$s" 2>&1 | tee %3$s &&FILENAME=`basename "%2$s" .java` &&FILEDIR=`dirname "%2$s"` &&echo 'Running %2$s...' &&(cd "$FILEDIR" && java "$FILENAME") 2>&1 | tee -a %3$s &&echo "%4$s" &&rm -f "%2$s" "$FILEDIR/$FILENAME.class"""
-  },
+    "template": "echo 'Checking for javac...' && (command -v javac || pkg install -y openjdk) && echo 'Compiling %2$s...' && javac \"%2$s\" 2>&1 | tee %3$s && FILENAME=`basename \"%2$s\" .java` && FILEDIR=`dirname \"%2$s\"` && echo 'Running %2$s...' && (cd \"$FILEDIR\" && java \"$FILENAME\") 2>&1 | tee -a %3$s && echo \"%4$s\" && rm -f \"%2$s\" \"$FILEDIR/$FILENAME.class\"" }
   "c": {
     "install": "(command -v clang || pkg install -y clang)",
     "template": "%1$s >/dev/null 2>&1 && clang \"%2$s\" -o %2$s.out 2>&1 | tee %3$s && \"%2$s.out\" 2>&1 | tee -a %3$s && echo \"\\n%4$s\" && rm -f \"%2$s\" \"%2$s.out\""
